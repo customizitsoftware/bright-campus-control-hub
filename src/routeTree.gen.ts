@@ -19,6 +19,7 @@ import { Route as ConsoleAttendanceRouteImport } from './routes/_console.attenda
 import { Route as ConsoleCommunicationsRouteImport } from './routes/_console.communications'
 import { Route as ConsoleDashboardRouteImport } from './routes/_console.dashboard'
 import { Route as ConsoleExamsRouteImport } from './routes/_console.exams'
+import { Route as ConsoleExpensesRouteImport } from './routes/_console.expenses'
 import { Route as ConsoleFinanceRouteImport } from './routes/_console.finance'
 import { Route as ConsoleParentPortalRouteImport } from './routes/_console.parent-portal'
 import { Route as ConsolePlatformAdminRouteImport } from './routes/_console.platform-admin'
@@ -26,6 +27,7 @@ import { Route as ConsoleReportsRouteImport } from './routes/_console.reports'
 import { Route as ConsoleSettingsRouteImport } from './routes/_console.settings'
 import { Route as ConsoleSetupRouteImport } from './routes/_console.setup'
 import { Route as ConsoleStaffRouteImport } from './routes/_console.staff'
+import { Route as ConsoleTimetableRouteImport } from './routes/_console.timetable'
 import { Route as ConsoleStudentsIndexRouteImport } from './routes/_console.students.index'
 import { Route as ConsoleStudentsStudentIdRouteImport } from './routes/_console.students.$studentId'
 
@@ -78,6 +80,11 @@ const ConsoleExamsRoute = ConsoleExamsRouteImport.update({
   path: '/exams',
   getParentRoute: () => ConsoleRoute,
 } as any)
+const ConsoleExpensesRoute = ConsoleExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 const ConsoleFinanceRoute = ConsoleFinanceRouteImport.update({
   id: '/finance',
   path: '/finance',
@@ -113,6 +120,11 @@ const ConsoleStaffRoute = ConsoleStaffRouteImport.update({
   path: '/staff',
   getParentRoute: () => ConsoleRoute,
 } as any)
+const ConsoleTimetableRoute = ConsoleTimetableRouteImport.update({
+  id: '/timetable',
+  path: '/timetable',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 const ConsoleStudentsIndexRoute = ConsoleStudentsIndexRouteImport.update({
   id: '/students/',
   path: '/students/',
@@ -135,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/communications': typeof ConsoleCommunicationsRoute
   '/dashboard': typeof ConsoleDashboardRoute
   '/exams': typeof ConsoleExamsRoute
+  '/expenses': typeof ConsoleExpensesRoute
   '/finance': typeof ConsoleFinanceRoute
   '/parent-portal': typeof ConsoleParentPortalRoute
   '/platform-admin': typeof ConsolePlatformAdminRoute
@@ -142,6 +155,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof ConsoleSettingsRoute
   '/setup': typeof ConsoleSetupRoute
   '/staff': typeof ConsoleStaffRoute
+  '/timetable': typeof ConsoleTimetableRoute
   '/students/$studentId': typeof ConsoleStudentsStudentIdRoute
   '/students/': typeof ConsoleStudentsIndexRoute
 }
@@ -155,6 +169,7 @@ export interface FileRoutesByTo {
   '/communications': typeof ConsoleCommunicationsRoute
   '/dashboard': typeof ConsoleDashboardRoute
   '/exams': typeof ConsoleExamsRoute
+  '/expenses': typeof ConsoleExpensesRoute
   '/finance': typeof ConsoleFinanceRoute
   '/parent-portal': typeof ConsoleParentPortalRoute
   '/platform-admin': typeof ConsolePlatformAdminRoute
@@ -162,6 +177,7 @@ export interface FileRoutesByTo {
   '/settings': typeof ConsoleSettingsRoute
   '/setup': typeof ConsoleSetupRoute
   '/staff': typeof ConsoleStaffRoute
+  '/timetable': typeof ConsoleTimetableRoute
   '/students/$studentId': typeof ConsoleStudentsStudentIdRoute
   '/students': typeof ConsoleStudentsIndexRoute
 }
@@ -177,6 +193,7 @@ export interface FileRoutesById {
   '/_console/communications': typeof ConsoleCommunicationsRoute
   '/_console/dashboard': typeof ConsoleDashboardRoute
   '/_console/exams': typeof ConsoleExamsRoute
+  '/_console/expenses': typeof ConsoleExpensesRoute
   '/_console/finance': typeof ConsoleFinanceRoute
   '/_console/parent-portal': typeof ConsoleParentPortalRoute
   '/_console/platform-admin': typeof ConsolePlatformAdminRoute
@@ -184,6 +201,7 @@ export interface FileRoutesById {
   '/_console/settings': typeof ConsoleSettingsRoute
   '/_console/setup': typeof ConsoleSetupRoute
   '/_console/staff': typeof ConsoleStaffRoute
+  '/_console/timetable': typeof ConsoleTimetableRoute
   '/_console/students/$studentId': typeof ConsoleStudentsStudentIdRoute
   '/_console/students/': typeof ConsoleStudentsIndexRoute
 }
@@ -199,6 +217,7 @@ export interface FileRouteTypes {
     | '/communications'
     | '/dashboard'
     | '/exams'
+    | '/expenses'
     | '/finance'
     | '/parent-portal'
     | '/platform-admin'
@@ -206,6 +225,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/setup'
     | '/staff'
+    | '/timetable'
     | '/students/$studentId'
     | '/students/'
   fileRoutesByTo: FileRoutesByTo
@@ -219,6 +239,7 @@ export interface FileRouteTypes {
     | '/communications'
     | '/dashboard'
     | '/exams'
+    | '/expenses'
     | '/finance'
     | '/parent-portal'
     | '/platform-admin'
@@ -226,6 +247,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/setup'
     | '/staff'
+    | '/timetable'
     | '/students/$studentId'
     | '/students'
   id:
@@ -240,6 +262,7 @@ export interface FileRouteTypes {
     | '/_console/communications'
     | '/_console/dashboard'
     | '/_console/exams'
+    | '/_console/expenses'
     | '/_console/finance'
     | '/_console/parent-portal'
     | '/_console/platform-admin'
@@ -247,6 +270,7 @@ export interface FileRouteTypes {
     | '/_console/settings'
     | '/_console/setup'
     | '/_console/staff'
+    | '/_console/timetable'
     | '/_console/students/$studentId'
     | '/_console/students/'
   fileRoutesById: FileRoutesById
@@ -330,6 +354,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleExamsRouteImport
       parentRoute: typeof ConsoleRoute
     }
+    '/_console/expenses': {
+      id: '/_console/expenses'
+      path: '/expenses'
+      fullPath: '/expenses'
+      preLoaderRoute: typeof ConsoleExpensesRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
     '/_console/finance': {
       id: '/_console/finance'
       path: '/finance'
@@ -379,6 +410,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleStaffRouteImport
       parentRoute: typeof ConsoleRoute
     }
+    '/_console/timetable': {
+      id: '/_console/timetable'
+      path: '/timetable'
+      fullPath: '/timetable'
+      preLoaderRoute: typeof ConsoleTimetableRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
     '/_console/students/': {
       id: '/_console/students/'
       path: '/students'
@@ -403,6 +441,7 @@ interface ConsoleRouteChildren {
   ConsoleCommunicationsRoute: typeof ConsoleCommunicationsRoute
   ConsoleDashboardRoute: typeof ConsoleDashboardRoute
   ConsoleExamsRoute: typeof ConsoleExamsRoute
+  ConsoleExpensesRoute: typeof ConsoleExpensesRoute
   ConsoleFinanceRoute: typeof ConsoleFinanceRoute
   ConsoleParentPortalRoute: typeof ConsoleParentPortalRoute
   ConsolePlatformAdminRoute: typeof ConsolePlatformAdminRoute
@@ -410,6 +449,7 @@ interface ConsoleRouteChildren {
   ConsoleSettingsRoute: typeof ConsoleSettingsRoute
   ConsoleSetupRoute: typeof ConsoleSetupRoute
   ConsoleStaffRoute: typeof ConsoleStaffRoute
+  ConsoleTimetableRoute: typeof ConsoleTimetableRoute
   ConsoleStudentsStudentIdRoute: typeof ConsoleStudentsStudentIdRoute
   ConsoleStudentsIndexRoute: typeof ConsoleStudentsIndexRoute
 }
@@ -421,6 +461,7 @@ const ConsoleRouteChildren: ConsoleRouteChildren = {
   ConsoleCommunicationsRoute: ConsoleCommunicationsRoute,
   ConsoleDashboardRoute: ConsoleDashboardRoute,
   ConsoleExamsRoute: ConsoleExamsRoute,
+  ConsoleExpensesRoute: ConsoleExpensesRoute,
   ConsoleFinanceRoute: ConsoleFinanceRoute,
   ConsoleParentPortalRoute: ConsoleParentPortalRoute,
   ConsolePlatformAdminRoute: ConsolePlatformAdminRoute,
@@ -428,6 +469,7 @@ const ConsoleRouteChildren: ConsoleRouteChildren = {
   ConsoleSettingsRoute: ConsoleSettingsRoute,
   ConsoleSetupRoute: ConsoleSetupRoute,
   ConsoleStaffRoute: ConsoleStaffRoute,
+  ConsoleTimetableRoute: ConsoleTimetableRoute,
   ConsoleStudentsStudentIdRoute: ConsoleStudentsStudentIdRoute,
   ConsoleStudentsIndexRoute: ConsoleStudentsIndexRoute,
 }
