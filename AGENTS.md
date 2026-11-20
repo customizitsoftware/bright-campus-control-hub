@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Architecture
+- Console pages live under the pathless `_console` layout (sidebar + top bar); auth pages (/login, /forgot-password) sit outside it. `/` redirects to `/dashboard`. Why: one shared shell with persistent role-preview state.
+- Navigation and role visibility are defined in `src/lib/navigation.ts`. Role filtering is a UI preview only; real authorization must be enforced server-side.
+- Unimplemented actions use `PendingAction` (disabled + tooltip) or `notifyPending` toast; never leave dead buttons or fake data/metrics.

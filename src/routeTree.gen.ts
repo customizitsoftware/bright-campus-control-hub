@@ -10,33 +10,252 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConsoleRouteImport } from './routes/_console'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ConsoleAcademicsRouteImport } from './routes/_console.academics'
+import { Route as ConsoleAdmissionsRouteImport } from './routes/_console.admissions'
+import { Route as ConsoleAttendanceRouteImport } from './routes/_console.attendance'
+import { Route as ConsoleCommunicationsRouteImport } from './routes/_console.communications'
+import { Route as ConsoleDashboardRouteImport } from './routes/_console.dashboard'
+import { Route as ConsoleExamsRouteImport } from './routes/_console.exams'
+import { Route as ConsoleFinanceRouteImport } from './routes/_console.finance'
+import { Route as ConsoleParentPortalRouteImport } from './routes/_console.parent-portal'
+import { Route as ConsolePlatformAdminRouteImport } from './routes/_console.platform-admin'
+import { Route as ConsoleReportsRouteImport } from './routes/_console.reports'
+import { Route as ConsoleSettingsRouteImport } from './routes/_console.settings'
+import { Route as ConsoleSetupRouteImport } from './routes/_console.setup'
+import { Route as ConsoleStaffRouteImport } from './routes/_console.staff'
+import { Route as ConsoleStudentsIndexRouteImport } from './routes/_console.students.index'
+import { Route as ConsoleStudentsStudentIdRouteImport } from './routes/_console.students.$studentId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsoleRoute = ConsoleRouteImport.update({
+  id: '/_console',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsoleAcademicsRoute = ConsoleAcademicsRouteImport.update({
+  id: '/academics',
+  path: '/academics',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAdmissionsRoute = ConsoleAdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAttendanceRoute = ConsoleAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleCommunicationsRoute = ConsoleCommunicationsRouteImport.update({
+  id: '/communications',
+  path: '/communications',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleDashboardRoute = ConsoleDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleExamsRoute = ConsoleExamsRouteImport.update({
+  id: '/exams',
+  path: '/exams',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleFinanceRoute = ConsoleFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleParentPortalRoute = ConsoleParentPortalRouteImport.update({
+  id: '/parent-portal',
+  path: '/parent-portal',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsolePlatformAdminRoute = ConsolePlatformAdminRouteImport.update({
+  id: '/platform-admin',
+  path: '/platform-admin',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleReportsRoute = ConsoleReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleSettingsRoute = ConsoleSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleSetupRoute = ConsoleSetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleStaffRoute = ConsoleStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleStudentsIndexRoute = ConsoleStudentsIndexRouteImport.update({
+  id: '/students/',
+  path: '/students/',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleStudentsStudentIdRoute =
+  ConsoleStudentsStudentIdRouteImport.update({
+    id: '/students/$studentId',
+    path: '/students/$studentId',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/academics': typeof ConsoleAcademicsRoute
+  '/admissions': typeof ConsoleAdmissionsRoute
+  '/attendance': typeof ConsoleAttendanceRoute
+  '/communications': typeof ConsoleCommunicationsRoute
+  '/dashboard': typeof ConsoleDashboardRoute
+  '/exams': typeof ConsoleExamsRoute
+  '/finance': typeof ConsoleFinanceRoute
+  '/parent-portal': typeof ConsoleParentPortalRoute
+  '/platform-admin': typeof ConsolePlatformAdminRoute
+  '/reports': typeof ConsoleReportsRoute
+  '/settings': typeof ConsoleSettingsRoute
+  '/setup': typeof ConsoleSetupRoute
+  '/staff': typeof ConsoleStaffRoute
+  '/students/$studentId': typeof ConsoleStudentsStudentIdRoute
+  '/students/': typeof ConsoleStudentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/academics': typeof ConsoleAcademicsRoute
+  '/admissions': typeof ConsoleAdmissionsRoute
+  '/attendance': typeof ConsoleAttendanceRoute
+  '/communications': typeof ConsoleCommunicationsRoute
+  '/dashboard': typeof ConsoleDashboardRoute
+  '/exams': typeof ConsoleExamsRoute
+  '/finance': typeof ConsoleFinanceRoute
+  '/parent-portal': typeof ConsoleParentPortalRoute
+  '/platform-admin': typeof ConsolePlatformAdminRoute
+  '/reports': typeof ConsoleReportsRoute
+  '/settings': typeof ConsoleSettingsRoute
+  '/setup': typeof ConsoleSetupRoute
+  '/staff': typeof ConsoleStaffRoute
+  '/students/$studentId': typeof ConsoleStudentsStudentIdRoute
+  '/students': typeof ConsoleStudentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_console': typeof ConsoleRouteWithChildren
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
+  '/_console/academics': typeof ConsoleAcademicsRoute
+  '/_console/admissions': typeof ConsoleAdmissionsRoute
+  '/_console/attendance': typeof ConsoleAttendanceRoute
+  '/_console/communications': typeof ConsoleCommunicationsRoute
+  '/_console/dashboard': typeof ConsoleDashboardRoute
+  '/_console/exams': typeof ConsoleExamsRoute
+  '/_console/finance': typeof ConsoleFinanceRoute
+  '/_console/parent-portal': typeof ConsoleParentPortalRoute
+  '/_console/platform-admin': typeof ConsolePlatformAdminRoute
+  '/_console/reports': typeof ConsoleReportsRoute
+  '/_console/settings': typeof ConsoleSettingsRoute
+  '/_console/setup': typeof ConsoleSetupRoute
+  '/_console/staff': typeof ConsoleStaffRoute
+  '/_console/students/$studentId': typeof ConsoleStudentsStudentIdRoute
+  '/_console/students/': typeof ConsoleStudentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/academics'
+    | '/admissions'
+    | '/attendance'
+    | '/communications'
+    | '/dashboard'
+    | '/exams'
+    | '/finance'
+    | '/parent-portal'
+    | '/platform-admin'
+    | '/reports'
+    | '/settings'
+    | '/setup'
+    | '/staff'
+    | '/students/$studentId'
+    | '/students/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/academics'
+    | '/admissions'
+    | '/attendance'
+    | '/communications'
+    | '/dashboard'
+    | '/exams'
+    | '/finance'
+    | '/parent-portal'
+    | '/platform-admin'
+    | '/reports'
+    | '/settings'
+    | '/setup'
+    | '/staff'
+    | '/students/$studentId'
+    | '/students'
+  id:
+    | '__root__'
+    | '/'
+    | '/_console'
+    | '/forgot-password'
+    | '/login'
+    | '/_console/academics'
+    | '/_console/admissions'
+    | '/_console/attendance'
+    | '/_console/communications'
+    | '/_console/dashboard'
+    | '/_console/exams'
+    | '/_console/finance'
+    | '/_console/parent-portal'
+    | '/_console/platform-admin'
+    | '/_console/reports'
+    | '/_console/settings'
+    | '/_console/setup'
+    | '/_console/staff'
+    | '/_console/students/$studentId'
+    | '/_console/students/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConsoleRoute: typeof ConsoleRouteWithChildren
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +267,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_console': {
+      id: '/_console'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ConsoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_console/academics': {
+      id: '/_console/academics'
+      path: '/academics'
+      fullPath: '/academics'
+      preLoaderRoute: typeof ConsoleAcademicsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/admissions': {
+      id: '/_console/admissions'
+      path: '/admissions'
+      fullPath: '/admissions'
+      preLoaderRoute: typeof ConsoleAdmissionsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/attendance': {
+      id: '/_console/attendance'
+      path: '/attendance'
+      fullPath: '/attendance'
+      preLoaderRoute: typeof ConsoleAttendanceRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/communications': {
+      id: '/_console/communications'
+      path: '/communications'
+      fullPath: '/communications'
+      preLoaderRoute: typeof ConsoleCommunicationsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/dashboard': {
+      id: '/_console/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ConsoleDashboardRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/exams': {
+      id: '/_console/exams'
+      path: '/exams'
+      fullPath: '/exams'
+      preLoaderRoute: typeof ConsoleExamsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/finance': {
+      id: '/_console/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof ConsoleFinanceRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/parent-portal': {
+      id: '/_console/parent-portal'
+      path: '/parent-portal'
+      fullPath: '/parent-portal'
+      preLoaderRoute: typeof ConsoleParentPortalRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/platform-admin': {
+      id: '/_console/platform-admin'
+      path: '/platform-admin'
+      fullPath: '/platform-admin'
+      preLoaderRoute: typeof ConsolePlatformAdminRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/reports': {
+      id: '/_console/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ConsoleReportsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/settings': {
+      id: '/_console/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ConsoleSettingsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/setup': {
+      id: '/_console/setup'
+      path: '/setup'
+      fullPath: '/setup'
+      preLoaderRoute: typeof ConsoleSetupRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/staff': {
+      id: '/_console/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof ConsoleStaffRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/students/': {
+      id: '/_console/students/'
+      path: '/students'
+      fullPath: '/students/'
+      preLoaderRoute: typeof ConsoleStudentsIndexRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/_console/students/$studentId': {
+      id: '/_console/students/$studentId'
+      path: '/students/$studentId'
+      fullPath: '/students/$studentId'
+      preLoaderRoute: typeof ConsoleStudentsStudentIdRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
   }
 }
 
+interface ConsoleRouteChildren {
+  ConsoleAcademicsRoute: typeof ConsoleAcademicsRoute
+  ConsoleAdmissionsRoute: typeof ConsoleAdmissionsRoute
+  ConsoleAttendanceRoute: typeof ConsoleAttendanceRoute
+  ConsoleCommunicationsRoute: typeof ConsoleCommunicationsRoute
+  ConsoleDashboardRoute: typeof ConsoleDashboardRoute
+  ConsoleExamsRoute: typeof ConsoleExamsRoute
+  ConsoleFinanceRoute: typeof ConsoleFinanceRoute
+  ConsoleParentPortalRoute: typeof ConsoleParentPortalRoute
+  ConsolePlatformAdminRoute: typeof ConsolePlatformAdminRoute
+  ConsoleReportsRoute: typeof ConsoleReportsRoute
+  ConsoleSettingsRoute: typeof ConsoleSettingsRoute
+  ConsoleSetupRoute: typeof ConsoleSetupRoute
+  ConsoleStaffRoute: typeof ConsoleStaffRoute
+  ConsoleStudentsStudentIdRoute: typeof ConsoleStudentsStudentIdRoute
+  ConsoleStudentsIndexRoute: typeof ConsoleStudentsIndexRoute
+}
+
+const ConsoleRouteChildren: ConsoleRouteChildren = {
+  ConsoleAcademicsRoute: ConsoleAcademicsRoute,
+  ConsoleAdmissionsRoute: ConsoleAdmissionsRoute,
+  ConsoleAttendanceRoute: ConsoleAttendanceRoute,
+  ConsoleCommunicationsRoute: ConsoleCommunicationsRoute,
+  ConsoleDashboardRoute: ConsoleDashboardRoute,
+  ConsoleExamsRoute: ConsoleExamsRoute,
+  ConsoleFinanceRoute: ConsoleFinanceRoute,
+  ConsoleParentPortalRoute: ConsoleParentPortalRoute,
+  ConsolePlatformAdminRoute: ConsolePlatformAdminRoute,
+  ConsoleReportsRoute: ConsoleReportsRoute,
+  ConsoleSettingsRoute: ConsoleSettingsRoute,
+  ConsoleSetupRoute: ConsoleSetupRoute,
+  ConsoleStaffRoute: ConsoleStaffRoute,
+  ConsoleStudentsStudentIdRoute: ConsoleStudentsStudentIdRoute,
+  ConsoleStudentsIndexRoute: ConsoleStudentsIndexRoute,
+}
+
+const ConsoleRouteWithChildren =
+  ConsoleRoute._addFileChildren(ConsoleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConsoleRoute: ConsoleRouteWithChildren,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
