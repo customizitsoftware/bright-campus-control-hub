@@ -1,6 +1,6 @@
 import {
-  LayoutDashboard, Building2, Users, UserPlus, BookOpen, CalendarCheck, ClipboardList,
-  Wallet, Briefcase, MessageSquare, HeartHandshake, BarChart3, Settings, ShieldCheck,
+  LayoutDashboard, Users, UserPlus, BookOpen, Briefcase, CalendarCheck, CalendarClock, ClipboardList,
+  Wallet, Receipt, MessageSquare, HeartHandshake, BarChart3, Building2, Settings, ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
 
@@ -30,38 +30,46 @@ export type NavItem = {
 
 const ALL: Role[] = ROLES.map((r) => r.value);
 const LEADERS: Role[] = ["platform_super_admin", "proprietor", "school_admin", "principal"];
+const FINANCE: Role[] = ["platform_super_admin", "proprietor", "school_admin", "bursar"];
 
 export const NAV_GROUPS: { label: string; items: NavItem[] }[] = [
   { label: "Overview", items: [{ title: "Dashboard", to: "/dashboard", icon: LayoutDashboard, roles: ALL }] },
   {
-    label: "Administration",
+    label: "School Management",
     items: [
-      { title: "School Setup", to: "/setup", icon: Building2, roles: ["platform_super_admin", "proprietor", "school_admin"] },
       { title: "Students", to: "/students", icon: Users, roles: [...LEADERS, "teacher"] },
       { title: "Admissions", to: "/admissions", icon: UserPlus, roles: LEADERS },
+      { title: "Classes & Subjects", to: "/academics", icon: BookOpen, roles: [...LEADERS, "teacher"] },
+      { title: "Staff", to: "/staff", icon: Briefcase, roles: [...LEADERS, "hr"] },
     ],
   },
   {
-    label: "Teaching & Learning",
+    label: "Academics",
     items: [
-      { title: "Academics", to: "/academics", icon: BookOpen, roles: [...LEADERS, "teacher"] },
       { title: "Attendance", to: "/attendance", icon: CalendarCheck, roles: [...LEADERS, "teacher"] },
+      { title: "Timetable", to: "/timetable", icon: CalendarClock, roles: [...LEADERS, "teacher", "student", "parent"] },
       { title: "Exams & Results", to: "/exams", icon: ClipboardList, roles: [...LEADERS, "teacher", "parent", "student"] },
     ],
   },
   {
-    label: "Operations",
+    label: "Finance",
     items: [
-      { title: "Finance", to: "/finance", icon: Wallet, roles: ["platform_super_admin", "proprietor", "school_admin", "bursar", "parent"] },
-      { title: "Staff & HR", to: "/staff", icon: Briefcase, roles: ["platform_super_admin", "proprietor", "school_admin", "principal", "hr"] },
-      { title: "Communication", to: "/communications", icon: MessageSquare, roles: ALL },
-      { title: "Parent Portal", to: "/parent-portal", icon: HeartHandshake, roles: [...LEADERS, "parent"] },
-      { title: "Reports & Insights", to: "/reports", icon: BarChart3, roles: [...LEADERS, "bursar", "hr"] },
+      { title: "Fees & Payments", to: "/finance", icon: Wallet, roles: [...FINANCE, "parent"] },
+      { title: "Expenses", to: "/expenses", icon: Receipt, roles: FINANCE },
     ],
   },
   {
-    label: "System",
+    label: "Engagement",
     items: [
+      { title: "Communication", to: "/communications", icon: MessageSquare, roles: ALL },
+      { title: "Parent Portal", to: "/parent-portal", icon: HeartHandshake, roles: [...LEADERS, "parent"] },
+    ],
+  },
+  { label: "Insights", items: [{ title: "Reports", to: "/reports", icon: BarChart3, roles: [...LEADERS, "bursar", "hr"] }] },
+  {
+    label: "Administration",
+    items: [
+      { title: "School Setup", to: "/setup", icon: Building2, roles: ["platform_super_admin", "proprietor", "school_admin"] },
       { title: "Settings", to: "/settings", icon: Settings, roles: ALL },
       { title: "Platform Admin", to: "/platform-admin", icon: ShieldCheck, roles: ["platform_super_admin"] },
     ],
@@ -72,4 +80,11 @@ export function navForRole(role: Role) {
   return NAV_GROUPS.map((g) => ({ ...g, items: g.items.filter((i) => i.roles.includes(role)) })).filter(
     (g) => g.items.length > 0,
   );
+}
+
+export function findNav(pathname: string) {
+  for (const g of NAV_GROUPS) {
+    for (const i of g.items) if (pathname === i.to || pathname.startsWith(i.to + "/")) return { group: g.label, item: i };
+  }
+  return null;
 }
