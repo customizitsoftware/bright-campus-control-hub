@@ -11,8 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConsoleRouteImport } from './routes/_console'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PaymentReturnRouteImport } from './routes/payment-return'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ConsoleAcademicsRouteImport } from './routes/_console.academics'
 import { Route as ConsoleAdmissionsRouteImport } from './routes/_console.admissions'
 import { Route as ConsoleAttendanceRouteImport } from './routes/_console.attendance'
@@ -40,6 +44,11 @@ const ConsoleRoute = ConsoleRouteImport.update({
   id: '/_console',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   id: '/forgot-password',
   path: '/forgot-password',
@@ -48,6 +57,21 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentReturnRoute = PaymentReturnRouteImport.update({
+  id: '/payment-return',
+  path: '/payment-return',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConsoleAcademicsRoute = ConsoleAcademicsRouteImport.update({
@@ -130,17 +154,20 @@ const ConsoleStudentsIndexRoute = ConsoleStudentsIndexRouteImport.update({
   path: '/students/',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleStudentsStudentIdRoute =
-  ConsoleStudentsStudentIdRouteImport.update({
-    id: '/students/$studentId',
-    path: '/students/$studentId',
-    getParentRoute: () => ConsoleRoute,
-  } as any)
+const ConsoleStudentsStudentIdRoute = ConsoleStudentsStudentIdRouteImport.update({
+  id: '/students/$studentId',
+  path: '/students/$studentId',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/payment-return': typeof PaymentReturnRoute
+  '/pricing': typeof PricingRoute
+  '/register': typeof RegisterRoute
   '/academics': typeof ConsoleAcademicsRoute
   '/admissions': typeof ConsoleAdmissionsRoute
   '/attendance': typeof ConsoleAttendanceRoute
@@ -161,8 +188,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/payment-return': typeof PaymentReturnRoute
+  '/pricing': typeof PricingRoute
+  '/register': typeof RegisterRoute
   '/academics': typeof ConsoleAcademicsRoute
   '/admissions': typeof ConsoleAdmissionsRoute
   '/attendance': typeof ConsoleAttendanceRoute
@@ -185,8 +216,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_console': typeof ConsoleRouteWithChildren
+  '/auth': typeof AuthRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
+  '/payment-return': typeof PaymentReturnRoute
+  '/pricing': typeof PricingRoute
+  '/register': typeof RegisterRoute
   '/_console/academics': typeof ConsoleAcademicsRoute
   '/_console/admissions': typeof ConsoleAdmissionsRoute
   '/_console/attendance': typeof ConsoleAttendanceRoute
@@ -209,8 +244,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/forgot-password'
     | '/login'
+    | '/payment-return'
+    | '/pricing'
+    | '/register'
     | '/academics'
     | '/admissions'
     | '/attendance'
@@ -231,8 +270,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/forgot-password'
     | '/login'
+    | '/payment-return'
+    | '/pricing'
+    | '/register'
     | '/academics'
     | '/admissions'
     | '/attendance'
@@ -254,8 +297,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_console'
+    | '/auth'
     | '/forgot-password'
     | '/login'
+    | '/payment-return'
+    | '/pricing'
+    | '/register'
     | '/_console/academics'
     | '/_console/admissions'
     | '/_console/attendance'
@@ -278,8 +325,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConsoleRoute: typeof ConsoleRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
+  PaymentReturnRoute: typeof PaymentReturnRoute
+  PricingRoute: typeof PricingRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -298,6 +349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/forgot-password': {
       id: '/forgot-password'
       path: '/forgot-password'
@@ -310,6 +368,27 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment-return': {
+      id: '/payment-return'
+      path: '/payment-return'
+      fullPath: '/payment-return'
+      preLoaderRoute: typeof PaymentReturnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_console/academics': {
@@ -480,8 +559,12 @@ const ConsoleRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConsoleRoute: ConsoleRouteWithChildren,
+  AuthRoute: AuthRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
+  PaymentReturnRoute: PaymentReturnRoute,
+  PricingRoute: PricingRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
