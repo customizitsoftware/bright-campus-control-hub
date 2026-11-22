@@ -109,6 +109,8 @@ function Register() {
         },
       });
 
+      if (!schoolId) throw new Error("No school was returned. Please try again.");
+
       if (effectiveMode === "trial") {
         window.location.assign("/dashboard");
         return;

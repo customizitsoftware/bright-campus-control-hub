@@ -10,6 +10,8 @@ export const Route = createFileRoute("/auth")({
     meta: [
       { title: "Account access · SchoolOS" },
       { name: "description", content: "Access your SchoolOS account securely." },
+      { property: "og:title", content: "Account access · SchoolOS" },
+      { property: "og:description", content: "Access your SchoolOS account securely." },
     ],
   }),
   beforeLoad: ({ search }) => {

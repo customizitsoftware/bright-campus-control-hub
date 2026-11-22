@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import { Bell, Building, ChevronDown, Search, UserCircle2 } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,12 @@ import {
 import { ROLES, type Role } from "@/lib/navigation";
 import { notifyPending } from "@/lib/pending";
 import { useRolePreview } from "./role-context";
+import { useSchool } from "./school-context";
 
 export function TopBar() {
   const { role, setRole } = useRolePreview();
+  const school = useSchool();
+  const navigate = getRouteApi('/_console').useNavigate();
   return (
     <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b border-border bg-background/90 px-3 backdrop-blur md:px-5">
       <SidebarTrigger aria-label="Toggle navigation" />
@@ -22,13 +25,17 @@ export function TopBar() {
         <PopoverTrigger asChild>
           <Button variant="ghost" className="gap-2 px-2" aria-label="Select school or campus">
             <Building className="size-4" aria-hidden />
-            <span className="hidden max-w-40 truncate sm:inline">No school selected</span>
+            <span className="max-w-40 truncate">{school.selected?.schools?.name ?? "No school selected"}</span>
             <ChevronDown className="size-3.5 opacity-60" aria-hidden />
           </Button>
         </PopoverTrigger>
         <PopoverContent align="start" className="w-72 text-sm">
           <p className="font-medium">School & campus</p>
-          <p className="mt-1 text-muted-foreground">No schools exist yet. Schools and campuses will appear here once the backend is connected.</p>
+          {school.memberships.length ? (
+            <div className="mt-2 space-y-1">
+              {school.memberships.map((membership) => <Button key={membership.id} variant={membership.school_id === school.selected?.school_id ? 'secondary' : 'ghost'} className="w-full justify-start" onClick={() => void navigate({ search: (previous) => ({ ...previous, school: membership.school_id }) })}>{membership.schools?.name ?? 'School'}</Button>)}
+            </div>
+          ) : <p className="mt-1 text-muted-foreground">You have no active school memberships.</p>}
           <Button asChild size="sm" className="mt-3 w-full"><Link to="/setup">Open setup wizard</Link></Button>
         </PopoverContent>
       </Popover>

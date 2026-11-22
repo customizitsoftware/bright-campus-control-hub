@@ -10,6 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 import { NIGERIAN_STATES } from "@/lib/locale-data";
+import { useSchool } from "@/components/layout/school-context";
 
 export const Route = createFileRoute("/_console/setup")({
   head: () => ({
@@ -56,6 +57,9 @@ function friendlyError(message: string) {
 }
 
 function SetupWizard() {
+  const workspace = useSchool();
+  const selectedSchoolId = workspace.selected?.school_id;
+  const selectedRole = workspace.selected?.role;
   const [status, setStatus] = useState<"loading" | "signed_out" | "no_school" | "ready">("loading");
   const [schoolId, setSchoolId] = useState("");
   const [setup, setSetup] = useState<Setup | null>(null);
@@ -73,16 +77,13 @@ function SetupWizard() {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
-      const { data: sess } = await supabase.auth.getSession();
-      if (!sess.session) { if (!cancelled) setStatus("signed_out"); return; }
-      const { data: members } = await supabase.from("school_members").select("school_id, role").eq("user_id", sess.session.user.id).eq("status", "active");
-      const admin = (members ?? []).find((m) => m.role === "school_admin");
-      if (!admin) { if (!cancelled) setStatus("no_school"); return; }
-      const { data, error } = await rpc("get_school_setup", { _school_id: admin.school_id });
+      if (!selectedSchoolId || selectedRole !== 'school_admin') { if (!cancelled) setStatus("no_school"); return; }
+      setStatus("loading");
+      const { data, error } = await rpc("get_school_setup", { _school_id: selectedSchoolId });
       if (cancelled) return;
       if (error || !data) { toast.error(error ? friendlyError(error.message) : "Could not load your school."); setStatus("no_school"); return; }
       const s = data as Setup;
-      setSchoolId(admin.school_id);
+      setSchoolId(selectedSchoolId);
       setSetup(s);
       setF((prev) => ({
         ...prev,
@@ -101,7 +102,7 @@ function SetupWizard() {
       setStatus("ready");
     })();
     return () => { cancelled = true; };
-  }, []);
+  }, [selectedSchoolId, selectedRole]);
 
   useEffect(() => {
     if (!logoFile) { setLogoPreview(null); return; }

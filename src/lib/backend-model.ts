@@ -12,7 +12,7 @@ export function formatMinor(amount: number | null, currency = 'NGN') {
 export function safeDestination(value: unknown, fallback = '/dashboard') {
   return typeof value === 'string' && value.startsWith('/') && !value.startsWith('//') && !/[\\\r\n]/.test(value) ? value : fallback;
 }
-export function accessMode(value: string): AccessMode {
+export function accessMode(value: string | null): AccessMode {
   return value === 'full' || value === 'read_only' || value === 'billing_only' || value === 'suspended' ? value : 'none';
 }
 export function priceFor(catalog: Catalog, planId: string, interval: Interval) {

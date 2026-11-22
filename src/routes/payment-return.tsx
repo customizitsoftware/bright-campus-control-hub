@@ -13,6 +13,8 @@ export const Route = createFileRoute("/payment-return")({
     meta: [
       { title: "Payment status · SchoolOS" },
       { name: "description", content: "Check the status of your SchoolOS subscription payment." },
+      { property: "og:title", content: "Payment status · SchoolOS" },
+      { property: "og:description", content: "Check the status of your SchoolOS subscription payment." },
     ],
   }),
   component: PaymentReturn,

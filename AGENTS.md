@@ -31,5 +31,7 @@ use the editor.
 
 ## Architecture
 - Console pages live under the pathless `_console` layout (sidebar + top bar); auth pages (/login, /forgot-password) sit outside it. `/` redirects to `/dashboard`. Why: one shared shell with persistent role-preview state.
+- The existing `_console` layout is client-only, checks the session before its workspace loader, and provides the workspace via SchoolContext; server functions remain the authorization boundary. Why: browser sessions are unavailable during SSR and every console page needs the same selected school.
+- Select the active school with the console's validated `school` search parameter and load its existing workspace query. Why: the top bar and setup must use the same server-validated membership.
 - Navigation and role visibility are defined in `src/lib/navigation.ts`. Role filtering is a UI preview only; real authorization must be enforced server-side.
 - Unimplemented actions use `PendingAction` (disabled + tooltip) or `notifyPending` toast; never leave dead buttons. Sample figures live only in `src/lib/demo-data.ts` and must render with a visible Demo label.

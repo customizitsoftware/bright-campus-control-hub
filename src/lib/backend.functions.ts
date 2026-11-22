@@ -41,7 +41,7 @@ export const getWorkspace = createServerFn({ method: 'POST' }).middleware([requi
   .inputValidator(z.object({ schoolId: z.string().uuid().optional() }))
   .handler(async ({ context, data }) => {
     const [members, profile, platform] = await Promise.all([
-      context.supabase.from('school_members').select('id,school_id,role,status,schools(id,name,slug,country,status)').eq('user_id', context.userId).eq('status', 'active').order('created_at'),
+      context.supabase.from('school_members').select('id,school_id,role,status,schools(id,name,slug,country,status,onboarding_completed)').eq('user_id', context.userId).eq('status', 'active').order('created_at'),
       context.supabase.from('profiles').select('full_name,phone').eq('id', context.userId).maybeSingle(),
       context.supabase.rpc('is_platform_admin'),
     ]);

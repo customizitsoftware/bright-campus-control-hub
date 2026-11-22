@@ -48,7 +48,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter className="group-data-[collapsible=icon]:hidden">
         <p className="rounded-md bg-sidebar-accent px-3 py-2 text-xs text-sidebar-foreground">
-          Menu shown for <strong>{ROLES.find((r) => r.value === role)?.label}</strong>. Preview only — access control is pending backend integration.
+          Menu preview: <strong>{ROLES.find((r) => r.value === role)?.label}</strong>
         </p>
       </SidebarFooter>
     </Sidebar>

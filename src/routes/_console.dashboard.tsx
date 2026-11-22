@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Circle, Users, Wallet, CalendarCheck, Megaphone } from "lucide-react";
+import { Circle, CircleCheck, Users, Wallet, CalendarCheck, Megaphone } from "lucide-react";
 import { PageHeader } from "@/components/common/page-header";
 import { EmptyState } from "@/components/common/empty-state";
-import { PendingBanner } from "@/components/common/pending-action";
+import { useSchool } from "@/components/layout/school-context";
+import { profileComplete } from "@/lib/console-state";
 import { StatusBadge } from "@/components/common/status-badge";
 import { Button } from "@/components/ui/button";
 
@@ -28,22 +29,23 @@ const CHECKLIST: { title: string; description: string; to: string }[] = [
 ];
 
 function Dashboard() {
+  const school = useSchool();
+  const complete = profileComplete(school.selected?.schools);
   return (
     <div className="space-y-8">
       <PageHeader title="Welcome to SchoolOS" description="Get your school ready in a few steps. Figures appear here only once real records exist." />
-      <PendingBanner>No school data is connected yet. Checklist progress isn't saved until the backend is set up.</PendingBanner>
 
       <section aria-labelledby="onboarding" className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
         <div className="bg-brand-gradient px-6 py-6 text-primary-foreground">
           <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Getting started</p>
           <h2 id="onboarding" className="mt-1 text-xl font-semibold">Onboarding checklist</h2>
-          <p className="mt-1 text-sm opacity-80">0 of {CHECKLIST.length} steps complete</p>
+          <p className="mt-1 text-sm opacity-80">{complete ? 1 : 0} of {CHECKLIST.length} steps complete</p>
         </div>
         <ol className="divide-y divide-border">
           {CHECKLIST.map((step, i) => (
             <li key={step.title} className="flex flex-col gap-3 px-6 py-4 sm:flex-row sm:items-center">
               <div className="flex flex-1 items-start gap-3">
-                <Circle className="mt-0.5 size-5 text-muted-foreground" aria-hidden />
+                {i === 0 && complete ? <CircleCheck className="mt-0.5 size-5 text-success" aria-label="Complete" /> : <Circle className="mt-0.5 size-5 text-muted-foreground" aria-hidden />}
                 <div>
                   <p className="font-medium">{i + 1}. {step.title}</p>
                   <p className="text-sm text-muted-foreground">{step.description}</p>

@@ -154,11 +154,12 @@ const ConsoleStudentsIndexRoute = ConsoleStudentsIndexRouteImport.update({
   path: '/students/',
   getParentRoute: () => ConsoleRoute,
 } as any)
-const ConsoleStudentsStudentIdRoute = ConsoleStudentsStudentIdRouteImport.update({
-  id: '/students/$studentId',
-  path: '/students/$studentId',
-  getParentRoute: () => ConsoleRoute,
-} as any)
+const ConsoleStudentsStudentIdRoute =
+  ConsoleStudentsStudentIdRouteImport.update({
+    id: '/students/$studentId',
+    path: '/students/$studentId',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
