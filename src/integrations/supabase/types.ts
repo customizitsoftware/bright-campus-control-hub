@@ -14,6 +14,73 @@ export type Database = {
   }
   public: {
     Tables: {
+      academic_sessions: {
+        Row: {
+          created_at: string
+          current_term: string
+          id: string
+          is_current: boolean
+          name: string
+          school_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_term?: string
+          id?: string
+          is_current?: boolean
+          name: string
+          school_id: string
+        }
+        Update: {
+          created_at?: string
+          current_term?: string
+          id?: string
+          is_current?: boolean
+          name?: string
+          school_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "academic_sessions_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campuses: {
+        Row: {
+          created_at: string
+          id: string
+          is_main: boolean
+          name: string
+          school_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_main?: boolean
+          name: string
+          school_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_main?: boolean
+          name?: string
+          school_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campuses_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       features: {
         Row: {
           created_at: string
@@ -585,48 +652,66 @@ export type Database = {
       schools: {
         Row: {
           address: string | null
+          brand_colour: string | null
           contact_email: string
           contact_phone: string | null
           country: string
           created_at: string
           created_by: string | null
           id: string
+          logo_path: string | null
+          motto: string | null
           name: string
           onboarding_completed: boolean
+          school_type: string | null
           slug: string
+          state: string | null
           status: Database["public"]["Enums"]["school_status"]
+          timezone: string
           updated_at: string
           verified_at: string | null
           verified_by: string | null
         }
         Insert: {
           address?: string | null
+          brand_colour?: string | null
           contact_email: string
           contact_phone?: string | null
           country?: string
           created_at?: string
           created_by?: string | null
           id?: string
+          logo_path?: string | null
+          motto?: string | null
           name: string
           onboarding_completed?: boolean
+          school_type?: string | null
           slug: string
+          state?: string | null
           status?: Database["public"]["Enums"]["school_status"]
+          timezone?: string
           updated_at?: string
           verified_at?: string | null
           verified_by?: string | null
         }
         Update: {
           address?: string | null
+          brand_colour?: string | null
           contact_email?: string
           contact_phone?: string | null
           country?: string
           created_at?: string
           created_by?: string | null
           id?: string
+          logo_path?: string | null
+          motto?: string | null
           name?: string
           onboarding_completed?: boolean
+          school_type?: string | null
           slug?: string
+          state?: string | null
           status?: Database["public"]["Enums"]["school_status"]
+          timezone?: string
           updated_at?: string
           verified_at?: string | null
           verified_by?: string | null
@@ -982,6 +1067,7 @@ export type Database = {
         }[]
       }
       get_platform_metrics: { Args: never; Returns: Json }
+      get_school_setup: { Args: { _school_id: string }; Returns: Json }
       has_feature: {
         Args: { _key: string; _school_id: string }
         Returns: boolean
@@ -1027,6 +1113,23 @@ export type Database = {
       }
       resume_subscription: { Args: { _school_id: string }; Returns: undefined }
       run_subscription_lifecycle: { Args: never; Returns: Json }
+      save_school_setup: {
+        Args: {
+          _brand_colour: string
+          _campus_mode: string
+          _campus_names: string[]
+          _logo_path?: string
+          _motto: string
+          _name: string
+          _school_id: string
+          _session: string
+          _state: string
+          _term: string
+          _timezone: string
+          _type: string
+        }
+        Returns: undefined
+      }
       school_access_mode: { Args: { _school_id: string }; Returns: string }
       school_can_write: { Args: { _school_id: string }; Returns: boolean }
       within_limit: {
