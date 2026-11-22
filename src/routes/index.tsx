@@ -271,7 +271,7 @@ function Showcase() {
 
 function BrowserFrame({ children, label, rounded }: { children: ReactNode; label: string; rounded?: boolean }) {
   return (
-    <div role="img" aria-label={label} className={`overflow-hidden border border-border bg-background shadow-2xl ${rounded ? "rounded-xl" : "rounded-t-xl"}`}>
+    <div role="img" aria-label={label} className={`overflow-hidden border border-border bg-background text-foreground shadow-2xl ${rounded ? "rounded-xl" : "rounded-t-xl"}`}>
       <div aria-hidden className="flex items-center gap-2 border-b border-border bg-muted px-4 py-2.5">
         <span className="size-2.5 rounded-full bg-destructive/60" /><span className="size-2.5 rounded-full bg-highlight/70" /><span className="size-2.5 rounded-full bg-success/60" />
         <span className="ml-3 hidden flex-1 truncate rounded-md bg-background px-3 py-1 text-[11px] text-muted-foreground sm:block">yourschool · SchoolOS</span>
@@ -283,7 +283,7 @@ function BrowserFrame({ children, label, rounded }: { children: ReactNode; label
 
 function PhoneFrame({ children, label }: { children: ReactNode; label: string }) {
   return (
-    <div role="img" aria-label={label} className="mx-auto w-64 overflow-hidden rounded-[2.25rem] border-[7px] border-sidebar bg-background shadow-2xl">
+    <div role="img" aria-label={label} className="mx-auto w-64 overflow-hidden rounded-[2.25rem] border-[7px] border-sidebar bg-background text-foreground shadow-2xl">
       <div aria-hidden>{children}</div>
     </div>
   );
