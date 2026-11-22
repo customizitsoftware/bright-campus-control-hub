@@ -29,7 +29,7 @@ export function PublicHeader() {
   return (
     <header className="border-b border-border bg-card">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-4">
-        <Link to="/pricing" className="flex items-center gap-2 font-display text-xl font-semibold">
+        <Link to="/" className="flex items-center gap-2 font-display text-xl font-semibold">
           <GraduationCap className="size-6 text-teal" />
           SchoolOS
         </Link>
