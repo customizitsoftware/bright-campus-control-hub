@@ -18,10 +18,14 @@ export function accessMode(value: string | null): AccessMode {
 export function priceFor(catalog: Catalog, planId: string, interval: Interval) {
   return catalog.prices.find(p => p.plan_id === planId && p.interval === interval && p.currency === 'NGN');
 }
+// "1 campuses" reads wrong, so singularise the unit when the limit is exactly one.
+const SINGULAR_UNITS: Record<string, string> = { students: 'student', accounts: 'account', campuses: 'campus', credits: 'credit' };
 export function entitlementLabel(entitlement: Tables<'plan_entitlements'> | undefined, feature: Tables<'features'>) {
   if (!entitlement?.enabled) return 'Not included';
   if (feature.kind === 'boolean') return 'Included';
   if (entitlement.is_unlimited) return 'Unlimited';
-  return entitlement.limit_value == null ? 'Not specified' : `${entitlement.limit_value.toLocaleString('en-NG')}${feature.unit ? ` ${feature.unit}` : ''}`;
+  if (entitlement.limit_value == null) return 'Not specified';
+  const unit = feature.unit && entitlement.limit_value === 1 ? (SINGULAR_UNITS[feature.unit] ?? feature.unit) : feature.unit;
+  return `${entitlement.limit_value.toLocaleString('en-NG')}${unit ? ` ${unit}` : ''}`;
 }
 export const dateTime = (value: string | null) => value ? new Date(value).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Africa/Lagos' }) : '—';
